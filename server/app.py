@@ -28,15 +28,43 @@ cur = conn.cursor()
 
 def  getUniversityDetails():
     print("getUniversityDetails")
-    cur.execute("SELECT * FROM university_details")
-    return jsonify(items=cur.fetchall())
+    try:
+        cur.execute("SELECT * FROM university_details")
+        return jsonify(items=cur.fetchall())
+
+    except Exception as e:
+        print(e)
+        msg = {"msg": "Failed to update the userdetails! please contact your administartor."}
+        code=500
+        return jsonify(msg)
 
 @app.route("/create-university-entry",methods=["POST"])
 
 def  createUniversityDetailsEntry():
     print("createUniversityDetailsEntry")
-    cur.execute("INSERT INTO university_details(alpha_two_code, country, domain, university_name, web_page, university_description, university_image) VALUES (%s,%s,%s,%s,%s,%s,%s)",('fname','lname','username','password','cpassword','email','selection'))
-    return "dd"
+    try:
+        cur.execute("INSERT INTO university_details(alpha_two_code, country, domain, university_name, web_page, university_description, university_image) VALUES (%s,%s,%s,%s,%s,%s,%s)",('fname','lname','username','password','cpassword','email','selection'))
+        msg = {"msg": "Success"}
+
+        return msg
+    except Exception as e:
+        print(e)
+        msg = {"msg": "Failed to update the userdetails! please contact your administartor."}
+        code=500
+        return jsonify(msg) 
+
+@app.route("/update-university-entry",methods=["POST"])
+
+def  updateUniversityDetailsEntry():
+    print("createUniversityDetailsEntry")
+    try:
+        cur.execute("INSERT INTO university_details(alpha_two_code, country, domain, university_name, web_page, university_description, university_image) VALUES (%s,%s,%s,%s,%s,%s,%s)",('fname','lname','username','password','cpassword','email','selection'))
+    except Exception as e:
+        print(e)
+        msg = {"msg": "Failed to update the userdetails! please contact your administartor."}
+        code=500
+
+    return msg
 
         
 if __name__ == '__main__':
