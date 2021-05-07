@@ -8,6 +8,8 @@ from flask import Flask
 from flask import request
 from flask_cors import CORS
 import psycopg2
+from flask import jsonify
+
 
 
 
@@ -24,15 +26,10 @@ cur = conn.cursor()
         
 @app.route("/voltality",methods=["GET"])
 
-def  voltality():
-    print("ajajaj")
+def  getUniversityDetails():
+    print("getUniversityDetails")
     cur.execute("SELECT * FROM university_details")
-    items = cur.fetchall()
-    print(items)
-
-
-   
-    return("slsl")
+    return jsonify(items=cur.fetchall())
 
         
 if __name__ == '__main__':
