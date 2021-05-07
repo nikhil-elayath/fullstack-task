@@ -7,27 +7,8 @@
 from flask import Flask
 from flask import request
 from flask_cors import CORS
-from flask_sqlalchemy import SQLAlchemy
+import psycopg2
 
-# from plotly.subplots import make_subplots
-# from flask_pymongo import PyMongo
-# import requests
-# # import plotly.express as px
-# import pandas as pd
-# import chart_studio
-# import chart_studio.tools as tls
-# import plotly.graph_objs as go
-# import chart_studio.plotly as py
-# import os, sys
-# import matplotlib
-# import base64
-# from matplotlib import cm
-# import math
-# from matplotlib import pyplot as plt
-# import numpy as np
-# from matplotlib.patches import Circle, Wedge, Rectangle
-# # py.sign_in('nikhile' ,'OkrregXQ8kgWtuZEcuOI')
-# py.sign_in('nikhilnikhil','9qEyahleVGoflQq6YbTe')
 
 
 # In[ ]:
@@ -35,21 +16,51 @@ from flask_sqlalchemy import SQLAlchemy
 # Establishing connection with MongoDB with specified database
 app = Flask(__name__)
 CORS(app)
-db = SQLAlchemy()
+conn_string = "host='localhost' dbname='university' user='postgres' password='password'"
+conn = psycopg2.connect(conn_string)
+cur = conn.cursor()
 
 
+        
+@app.route("/voltality",methods=["GET"])
 
-# Plotting OHLC graph for indices
-@app.route("/ohlcindices",methods=["GET"])
-def ohlc_indices():
-    print("from api")
-    return ("url")
+def  voltality():
+    print("ajajaj")
+    cur.execute("SELECT * FROM university_details")
+    items = cur.fetchall()
+    print(items)
 
+
+   
+    return("slsl")
+
+        
 if __name__ == '__main__':
     app.run(debug=False,port=5000)
 
 
+# In[ ]:
 
+
+# get_ipython().system('pip install flask_cors')
+
+
+# In[ ]:
+
+
+
+
+# In[ ]:
+
+
+
+
+# In[ ]:
+
+
+
+
+# In[ ]:
 
 
 
