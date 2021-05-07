@@ -66,6 +66,24 @@ def  updateUniversityDetailsEntry():
 
     return msg
 
+
+@app.route("/search/<query>",methods=["GET"])
+
+def  getSearchResults(query):
+    print("getSearchResults",query)
+    try:
+        cur.execute("SELECT * FROM university_details WHERE  university_name LIKE (%s)", [query+"%"])
+        msg = {"msg": "Sucess"}
+        code=200
+        return jsonify(items=cur.fetchall())
+        
+        
+    except Exception as e:
+        print("SS",e)
+        msg = {"msg": "Failed to update the userdetails! please contact your administartor."}
+        code=500
+        return msg
+
         
 if __name__ == '__main__':
     app.run(debug=False,port=5000)
