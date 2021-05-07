@@ -7,6 +7,8 @@
 from flask import Flask
 from flask import request
 from flask_cors import CORS
+from flask_sqlalchemy import SQLAlchemy
+
 # from plotly.subplots import make_subplots
 # from flask_pymongo import PyMongo
 # import requests
@@ -33,6 +35,8 @@ from flask_cors import CORS
 # Establishing connection with MongoDB with specified database
 app = Flask(__name__)
 CORS(app)
+db = SQLAlchemy()
+
 
 
 # Plotting OHLC graph for indices
