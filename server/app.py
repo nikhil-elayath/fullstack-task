@@ -24,12 +24,19 @@ cur = conn.cursor()
 
 
         
-@app.route("/voltality",methods=["GET"])
+@app.route("/get-university-details",methods=["GET"])
 
 def  getUniversityDetails():
     print("getUniversityDetails")
     cur.execute("SELECT * FROM university_details")
     return jsonify(items=cur.fetchall())
+
+@app.route("/create-university-entry",methods=["POST"])
+
+def  createUniversityDetailsEntry():
+    print("createUniversityDetailsEntry")
+    cur.execute("INSERT INTO university_details(alpha_two_code, country, domain, university_name, web_page, university_description, university_image) VALUES (%s,%s,%s,%s,%s,%s,%s)",('fname','lname','username','password','cpassword','email','selection'))
+    return "dd"
 
         
 if __name__ == '__main__':
