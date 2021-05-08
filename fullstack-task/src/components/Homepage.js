@@ -43,6 +43,7 @@ export default function Homepage() {
     }
     dispatch(getSearchResults(searchData));
     await setShowingSearchResults(true);
+    await setValue('');
   };
   const onTextEnter = (enteredText) => {
     setSearchQuery(enteredText.target.value);
@@ -71,7 +72,7 @@ export default function Homepage() {
         <div id="Homepage__filterContainer">
           {/* <h2> Filter</h2> */}
             <img src={FilterIcon} id="Homepage__filterIcon" />
-          <div style={{width:"50%"}}>
+          <div style={{width:"20%"}}>
             <Select options={options} value={value} onChange={changeHandler}  styles={{width:"100px"}} placeholder={"Filter by country"}/>
 
           </div>
@@ -95,7 +96,9 @@ export default function Homepage() {
             );
           })
         ) : (
+          <div id="Homepage__noResultsContainer">
           <h2>No results found </h2>
+          </div>
         )}
       </div>
     </div>

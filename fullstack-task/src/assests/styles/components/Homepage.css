@@ -39,7 +39,8 @@
   }
   #homepage__inputField {
     height: 20px;
-    width: 250px;
+    width: 50%;
+    height: 35px;
     text-align: center;
   }
 
@@ -57,6 +58,8 @@
   }
   #Homepage__filterIcon {
     padding-left: 10px;
-    width: 100px;
+    padding-right: 10px;
+    width: 30px;
   }
+
 }
