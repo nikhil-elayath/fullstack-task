@@ -80,10 +80,16 @@ def  updateUniversityDetailsEntry():
 def  getSearchResults(query):
     print("getSearchResults",query)
     try:
-        cur.execute("SELECT * FROM university_details WHERE  university_name LIKE (%s)", [query+"%"])
+        cur.execute("SELECT * FROM university_details WHERE  university_name ILIKE (%s)", [query+"%"])
         msg = {"msg": "Sucess"}
         code=200
-        return jsonify(items=cur.fetchall())
+        row_headers=[x[0] for x in cur.description] #this will extract row headers
+        rv = cur.fetchall()
+        json_data=[]
+        for result in rv:
+            json_data.append(dict(zip(row_headers,result)))
+        print (json.dumps(json_data))
+        return (json.dumps(json_data))
         
         
     except Exception as e:

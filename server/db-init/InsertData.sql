@@ -9,6 +9,8 @@ VALUES
     ('US', 'United States', 'acu.edu', 'Abilene Christian University', 'http://www.acu.edu/', 'university description', 'image'),
     ('US', 'United States', 'acu.edu', 'Abilene Christian University', 'http://www.acu.edu/', 'university description', 'image'),
     ('US', 'United States', 'acu.edu', 'Abilene Christian University', 'http://www.acu.edu/', 'university description', 'image'),
-    ('US', 'United States', 'acu.edu', 'Abilene Christian University', 'http://www.acu.edu/', 'university description', 'image')
+    ('US', 'United States', 'acu.edu', 'Abilene Christian University', 'http://www.acu.edu/', 'university description', 'image'),
+    ('US', 'United States', 'acu.edu', 'sTANFORD', 'http://www.acu.edu/', 'university description', 'image'),
+    ('US', 'United States', 'acu.edu', 'hARVARD', 'http://www.acu.edu/', 'university description', 'image')
  
   

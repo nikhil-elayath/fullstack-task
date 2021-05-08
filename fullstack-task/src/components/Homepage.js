@@ -1,16 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import SearchCard from "../common/SearchCard";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllUniversityData } from "../actions/UniversityDetails";
+import { getAllUniversityData, getSearchResults } from "../actions/UniversityDetails";
 
 import "../assests/styles/components/Homepage.css";
 
 export default function Homepage() {
+  const [playerData, setPlayerData] = useState([]);
+  const [searchQuery, setSearchQuery] = React.useState("");
   const dispatch = useDispatch();
   const store = useSelector((state) => state.universityData);
-  const searchSubmit=()=>{
+  const searchSubmit = (event) => {
+    console.log("from searchSubmit")
+    // to prevent refreshing of the page
+    event.preventDefault();
+    console.log("search",searchQuery)
+    dispatch(getSearchResults(searchQuery))
 
-  }
+  };
+  const onTextEnter = (enteredText) => {
+    setSearchQuery(enteredText.target.value);
+  };
 
   useEffect(async () => {
     // action call that will get all the user entries
@@ -25,8 +35,8 @@ export default function Homepage() {
           <input
             id="homepage__inputField"
             placeholder="Enter University name"
-            // onChange={onTextEnter}
-            // onSubmit={searchSubmit}
+            onChange={onTextEnter}
+            onSubmit={searchSubmit}
           />
         </form>
       </div>
