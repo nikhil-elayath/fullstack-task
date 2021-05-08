@@ -77,6 +77,24 @@ def  updateUniversityDetailsEntry():
 
     return msg
 
+# delete
+@app.route("/delete-university-entry",methods=["POST"])
+
+def  deleteUniversityDetailsEntry():
+    print("createUniversityDetailsEntry")
+    data = json.loads(request.data)
+
+    try:
+        cur.execute("DELETE FROM university_details WHERE id=(%s)",[data['id']])
+        msg = {"msg": "Entry deleted successfully"}
+        code=200
+    except Exception as e:
+        print(e)
+        msg = {"msg": "Failed to update the userdetails! please contact your administartor."}
+        code=500
+
+    return msg
+
 
 @app.route("/search",methods=["POST"])
 
