@@ -51,9 +51,8 @@ def  getUniversityDetails():
 def  createUniversityDetailsEntry():
     print("createUniversityDetailsEntry")
     try:
-        cur.execute("INSERT INTO university_details(alpha_two_code, country, domain, university_name, web_page, university_description, university_image) VALUES (%s,%s,%s,%s,%s,%s,%s)",('fname','lname','username','password','cpassword','email','selection'))
+        cur.execute("INSERT INTO university_details(alpha_two_code, country, domain, university_name, web_page, university_description, university_image) VALUES (%s,%s,%s,%s,%s,%s,%s)",[data['alpha_two_code'],data['country'],data['domain'],data['university_name'],data['web_page'],data['university_description'],data['university_image'] ])
         msg = {"msg": "Success"}
-
         return msg
     except Exception as e:
         print(e)
@@ -65,8 +64,12 @@ def  createUniversityDetailsEntry():
 
 def  updateUniversityDetailsEntry():
     print("createUniversityDetailsEntry")
+    data = json.loads(request.data)
+
     try:
-        cur.execute("INSERT INTO university_details(alpha_two_code, country, domain, university_name, web_page, university_description, university_image) VALUES (%s,%s,%s,%s,%s,%s,%s)",('fname','lname','username','password','cpassword','email','selection'))
+        cur.execute("INSERT INTO university_details(alpha_two_code, country, domain, university_name, web_page, university_description, university_image) VALUES (%s,%s,%s,%s,%s,%s,%s)",[data['alpha_two_code'],data['country'],data['domain'],data['university_name'],data['web_page'],data['university_description'],data['university_image'] ])
+        msg = {"msg": "Entry created successfully"}
+        code=200
     except Exception as e:
         print(e)
         msg = {"msg": "Failed to update the userdetails! please contact your administartor."}
@@ -80,8 +83,6 @@ def  updateUniversityDetailsEntry():
 def  getSearchResults():
     print("getSearchResults")
     data = json.loads(request.data)
-    print(data)
-    # print(data.[country])
 
     try:
         cur.execute("SELECT * FROM university_details WHERE  university_name ILIKE (%s) AND alpha_two_code = (%s) ", [data['searchQuery']+"%",data['country']])
@@ -92,7 +93,6 @@ def  getSearchResults():
         json_data=[]
         for result in rv:
             json_data.append(dict(zip(row_headers,result)))
-        print (json.dumps(json_data))
         return (json.dumps(json_data))
         
         
