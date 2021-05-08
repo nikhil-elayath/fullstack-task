@@ -6,6 +6,16 @@
     grid-template-columns: 1fr;
     text-align: center;
   }
+  #homepage__inputField {
+    height: 20px;
+    width: 250px;
+    text-align: center;
+  }
+
+  #Homepage__parentContainer {
+    text-align: center;
+    padding: 20px;
+  }
 }
 
 /* desktop */
@@ -15,5 +25,15 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     text-align: center;
+  }
+  #homepage__inputField {
+    height: 20px;
+    width: 250px;
+    text-align: center;
+  }
+
+  #Homepage__parentContainer {
+    text-align: center;
+    padding: 20px;
   }
 }

@@ -8,6 +8,9 @@ import "../assests/styles/components/Homepage.css";
 export default function Homepage() {
   const dispatch = useDispatch();
   const store = useSelector((state) => state.universityData);
+  const searchSubmit=()=>{
+
+  }
 
   useEffect(async () => {
     // action call that will get all the user entries
@@ -16,7 +19,18 @@ export default function Homepage() {
   console.log("store from home", store);
 
   return (
-    <div id="Homepage__mainContainer">
+    <div id="Homepage__parentContainer">
+      <div id="Homepage__searchBarContainer">
+        <form onSubmit={searchSubmit}>
+          <input
+            id="homepage__inputField"
+            placeholder="Enter University name"
+            // onChange={onTextEnter}
+            // onSubmit={searchSubmit}
+          />
+        </form>
+      </div>
+      <div id="Homepage__mainContainer">
       {store.allUniversityData &&
         store.allUniversityData.length != 0 &&
         store.allUniversityData.map((item, index) => {
@@ -32,6 +46,7 @@ export default function Homepage() {
             />
           );
         })}
+        </div>
     </div>
   );
 }
