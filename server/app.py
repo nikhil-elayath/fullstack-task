@@ -31,20 +31,18 @@ cur = conn.cursor()
 def  getUniversityDetails():
     print("getUniversityDetails")
     try:
-        cur.execute("SELECT * FROM university_details")
+        cur.execute("SELECT * FROM university_detdails")
         row_headers=[x[0] for x in cur.description] #this will extract row headers
         rv = cur.fetchall()
         json_data=[]
         for result in rv:
             json_data.append(dict(zip(row_headers,result)))
-        print (json.dumps(json_data))
         return (json.dumps(json_data))
 
     except Exception as e:
         print(e)
-        msg = {"msg": "Failed to update the userdetails! please contact your administartor."}
-        code=500
-        return jsonify(msg)
+        response = {'statusCode':'500', 'msg':'Data not retrieved successfully'} 
+        return (response)
 
 @app.route("/create-university-entry",methods=["POST"])
 
@@ -56,26 +54,21 @@ def  createUniversityDetailsEntry():
         return msg
     except Exception as e:
         print(e)
-        msg = {"msg": "Failed to update the userdetails! please contact your administartor."}
-        code=500
-        return jsonify(msg) 
+        response = {'statusCode':'500', 'msg':'Data not retrieved successfully'} 
+        return (response) 
 
 @app.route("/update-university-entry",methods=["POST"])
 
 def  updateUniversityDetailsEntry():
-    print("createUniversityDetailsEntry")
     data = json.loads(request.data)
 
     try:
         cur.execute("INSERT INTO university_details(alpha_two_code, country, domain, university_name, web_page, university_description, university_image) VALUES (%s,%s,%s,%s,%s,%s,%s)",[data['alpha_two_code'],data['country'],data['domain'],data['university_name'],data['web_page'],data['university_description'],data['university_image'] ])
-        msg = {"msg": "Entry created successfully"}
-        code=200
+        response = {'statusCode':'200', 'msg':'Data updated sucessfully'} 
+        return (response)
     except Exception as e:
-        print(e)
-        msg = {"msg": "Failed to update the userdetails! please contact your administartor."}
-        code=500
-
-    return msg
+        response = {'statusCode':'500', 'msg':'Data not updated'} 
+        return (response)
 
 # delete
 @app.route("/delete-university-entry",methods=["POST"])
@@ -86,14 +79,11 @@ def  deleteUniversityDetailsEntry():
 
     try:
         cur.execute("DELETE FROM university_details WHERE id=(%s)",[data['id']])
-        msg = {"msg": "Entry deleted successfully"}
-        code=200
+        response = {'statusCode':'200', 'msg':'Data deleted successfully'} 
+        return (response)
     except Exception as e:
-        print(e)
-        msg = {"msg": "Failed to update the userdetails! please contact your administartor."}
-        code=500
-
-    return msg
+        response = {'statusCode':'500', 'msg':'Data could not be deleted'} 
+        return (response)
 
 
 @app.route("/search",methods=["POST"])
