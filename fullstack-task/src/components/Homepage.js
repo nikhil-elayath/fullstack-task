@@ -20,7 +20,17 @@ export default function Homepage() {
       {store.allUniversityData &&
         store.allUniversityData.length != 0 &&
         store.allUniversityData.map((item, index) => {
-          return <SearchCard />;
+          return (
+            <SearchCard
+              countryCode={item.alpha_two_code}
+              country={item.country}
+              domain={item.domain}
+              universityDescription={item.university_description}
+              universityImage={item.university_image}
+              universityName={item.university_name}
+              webpageUrl={item.web_page}
+            />
+          );
         })}
     </div>
   );
