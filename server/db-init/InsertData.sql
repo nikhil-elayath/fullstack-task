@@ -1,5 +1,4 @@
-\c
-university;
+\c university;
 
 -- inserting contacts of users into db
 INSERT INTO university_details
