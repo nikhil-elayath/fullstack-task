@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import SearchCard from "../common/SearchCard";
 import { useDispatch, useSelector } from "react-redux";
+import countryList from "react-select-country-list";
+import Select from "react-select";
+
 import {
   getAllUniversityData,
   getSearchResults,
@@ -14,6 +17,19 @@ export default function Homepage() {
   const [searchQuery, setSearchQuery] = React.useState("");
   const [showingSearchResults, setShowingSearchResults] = React.useState(false);
   const [selectedCountryCode, setSelectedCountryCode] = React.useState("US");
+  const [value, setValue] = useState("");
+  const options = useMemo(() => countryList().getData(), []);
+  const changeHandler = (value) => {
+    setValue(value);
+    console.log("value", value)
+    let searchData={
+      searchQuery:searchQuery,
+      country:value.value
+    }
+    dispatch(getSearchResults(searchData));
+
+  };
+
   const dispatch = useDispatch();
   const store = useSelector((state) => state.universityData);
   const searchSubmit = async (event) => {
@@ -21,7 +37,11 @@ export default function Homepage() {
     // to prevent refreshing of the page
     event.preventDefault();
     console.log("search", searchQuery);
-    dispatch(getSearchResults(searchQuery));
+    let searchData={
+      searchQuery:searchQuery,
+      country:"US"
+    }
+    dispatch(getSearchResults(searchData));
     await setShowingSearchResults(true);
   };
   const onTextEnter = (enteredText) => {
@@ -49,9 +69,11 @@ export default function Homepage() {
       {/* filter container */}
       {showingSearchResults == true && (
         <div id="Homepage__filterContainer">
-          <h2> Filter</h2>
-          <div>
-          <img src={FilterIcon} id="Homepage__filterIcon" />
+          {/* <h2> Filter</h2> */}
+            <img src={FilterIcon} id="Homepage__filterIcon" />
+          <div style={{width:"50%"}}>
+            <Select options={options} value={value} onChange={changeHandler}  styles={{width:"100px"}} placeholder={"Filter by country"}/>
+
           </div>
         </div>
       )}

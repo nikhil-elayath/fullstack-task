@@ -75,12 +75,16 @@ def  updateUniversityDetailsEntry():
     return msg
 
 
-@app.route("/search/<query>",methods=["GET"])
+@app.route("/search",methods=["POST"])
 
-def  getSearchResults(query):
-    print("getSearchResults",query)
+def  getSearchResults():
+    print("getSearchResults")
+    data = json.loads(request.data)
+    print(data)
+    # print(data.[country])
+
     try:
-        cur.execute("SELECT * FROM university_details WHERE  university_name ILIKE (%s)", [query+"%"])
+        cur.execute("SELECT * FROM university_details WHERE  university_name ILIKE (%s) AND alpha_two_code = (%s) ", [data['searchQuery']+"%",data['country']])
         msg = {"msg": "Sucess"}
         code=200
         row_headers=[x[0] for x in cur.description] #this will extract row headers

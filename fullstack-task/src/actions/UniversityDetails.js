@@ -24,7 +24,7 @@ import {
   export const getSearchResults = (searchQuery) => async dispatch => {
       console.log("searchQuery from actions",searchQuery)
     return axios
-      .get(url + '/search/'+searchQuery)
+      .post(url + '/search',searchQuery)
       .then(res => {
         dispatch({
           type: GET_SEARCH_RESULTS,
@@ -32,6 +32,7 @@ import {
         });
       })
       .catch(err => {
+          console.log("error from action",err)
         // dispatch({type: ERROR, payload: err});
       });
   };
