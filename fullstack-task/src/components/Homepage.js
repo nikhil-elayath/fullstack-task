@@ -13,17 +13,17 @@ import FilterIcon from "../assests/icons/filter.svg";
 import "../assests/styles/components/Homepage.css";
 
 export default function Homepage() {
-  const [playerData, setPlayerData] = useState([]);
   const [searchQuery, setSearchQuery] = React.useState("");
   const [showingSearchResults, setShowingSearchResults] = React.useState(false);
-  const [selectedCountryCode, setSelectedCountryCode] = React.useState("US");
   const [value, setValue] = useState("");
   const options = useMemo(() => countryList().getData(), []);
+  // handles change for the drop down
+  // updates the state with the selected value and makes an api call
   const changeHandler = (value) => {
     setValue(value);
-    console.log("value", value)
     let searchData={
       searchQuery:searchQuery,
+      // the counterey code
       country:value.value
     }
     dispatch(getSearchResults(searchData));
@@ -32,28 +32,33 @@ export default function Homepage() {
 
   const dispatch = useDispatch();
   const store = useSelector((state) => state.universityData);
+  // function that handles the search submit
+
   const searchSubmit = async (event) => {
-    console.log("from searchSubmit");
     // to prevent refreshing of the page
     event.preventDefault();
-    console.log("search", searchQuery);
     let searchData={
       searchQuery:searchQuery,
       country:"US"
     }
+    // passes the search query and the country code to the api
     dispatch(getSearchResults(searchData));
+    // sets setShowingSearchResults = true to show the filter division
+    // User should be allowed to filter through the only the search results
     await setShowingSearchResults(true);
+    // setting the value of the country code to '' so that there is no default country set
     await setValue('');
   };
+
+  // handling the text entered by the user
   const onTextEnter = (enteredText) => {
     setSearchQuery(enteredText.target.value);
   };
 
   useEffect(async () => {
-    // action call that will get all the user entries
+    // action call that will get all the university entries
     await dispatch(getAllUniversityData());
   }, []);
-  console.log("store from home", store);
 
   return (
     <div id="Homepage__parentContainer">
