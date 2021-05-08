@@ -1,20 +1,17 @@
 /* mobile view */
 @media only screen and (max-width: 480px) {
   #Homepage__mainContainer {
-    background-color: lightblue;
-    margin-top: 20px;
+    /* background-color: lightblue; */
+    display: grid;
+    grid-template-columns: 1fr;
     text-align: center;
-    width: auto;
-    border-radius: 10px;
-
-    padding-top: 20px;
   }
 }
 
 /* desktop */
 @media only screen and (min-width: 480px) {
   #Homepage__mainContainer {
-    background-color: lightblue;
+    /* background-color: lightblue; */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     text-align: center;
