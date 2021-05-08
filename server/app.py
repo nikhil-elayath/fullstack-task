@@ -9,6 +9,8 @@ from flask import request
 from flask_cors import CORS
 import psycopg2
 from flask import jsonify
+import json
+
 
 
 
@@ -30,7 +32,13 @@ def  getUniversityDetails():
     print("getUniversityDetails")
     try:
         cur.execute("SELECT * FROM university_details")
-        return jsonify(items=cur.fetchall())
+        row_headers=[x[0] for x in cur.description] #this will extract row headers
+        rv = cur.fetchall()
+        json_data=[]
+        for result in rv:
+            json_data.append(dict(zip(row_headers,result)))
+        print (json.dumps(json_data))
+        return (json.dumps(json_data))
 
     except Exception as e:
         print(e)
