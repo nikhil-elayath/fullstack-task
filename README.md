@@ -11,3 +11,8 @@ This will insert  some dummy data in to the table
 # Setting up Server
 Run the server by python app.py
 
+# Development process
+Created feature branches for each feature locally and merged it directly into development merge.
+After developing all the features and merging it to the development branch. Made sure the development branch is bug free and everything is working fine.
+Then merged the development branchwith main
+
