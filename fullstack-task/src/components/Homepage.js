@@ -77,7 +77,7 @@ export default function Homepage() {
         <div id="Homepage__filterContainer">
           {/* <h2> Filter</h2> */}
             <img src={FilterIcon} id="Homepage__filterIcon" />
-          <div style={{width:"20%"}}>
+          <div id="Homepage__dropdown">
             <Select options={options} value={value} onChange={changeHandler}  styles={{width:"100px"}} placeholder={"Filter by country"}/>
 
           </div>

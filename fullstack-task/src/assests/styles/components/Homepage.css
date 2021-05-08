@@ -20,13 +20,18 @@
     text-align: left;
     display: flex;
     flex-direction: row;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
+    padding-top: 20px;
   }
   #Homepage__filterIcon {
-    padding-left: 10px;
-    width: 10px;
+    padding-left: 20px;
+    width: 20px;
   }
+  #Homepage__dropdown {
+    width: 50%;
+    padding-left: 10px;
+     }
 }
 
 /* desktop */
@@ -60,6 +65,9 @@
     padding-left: 10px;
     padding-right: 10px;
     width: 30px;
+  }
+  #Homepage__dropdown {
+ width: 20%;
   }
 
 }
