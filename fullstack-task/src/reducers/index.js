@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import Dummy from "./Dummy";
+import universityData from "./UniversityReducer";
 export default combineReducers({
-    Dummy: Dummy,
+    universityData: universityData,
 });
